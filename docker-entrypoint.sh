@@ -6,7 +6,23 @@ CMD="$@"
 
 if [ "$1" = './srcds_run' ]; then
     if [ -n "$STEAM_GAME_SERVER_TOKEN" ]; then
-      CMD+=" +sv_setsteamaccount $STEAM_GAME_SERVER_TOKEN"
+      CMD+=" +sv_setsteamaccount $STEAM_GAME_SERVER_TOKEN -net_port_try 1"
+    fi
+
+    if [ -n "$GAME_TYPE" ]; then
+      CMD+=" +game_type $GAME_TYPE"
+    fi
+
+    if [ -n "$GAME_MODE" ]; then
+      CMD+=" +game_mode $GAME_MODE"
+    fi
+
+    if [ -n "$MAPGROUP" ]; then
+      CMD+=" +mapgroup $MAPGROUP"
+    fi
+
+    if [ -n "$MAP" ]; then
+      CMD+=" +map $MAP"
     fi
 
     if [ -z "$SERVER_NAME" ]; then
